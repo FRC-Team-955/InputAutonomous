@@ -4,3 +4,9 @@
 *.jar
 *.war
 *.ear
+project.xml
+project.bak.xml
+/nbproject/
+suite/
+j2meclasses/
+build/
