@@ -12,11 +12,8 @@ import edu.wpi.first.wpilibj.Timer;
  * "replays" it.
  * @author fauzi
  */
-class Replayer {
-  
-    // CONSTANTS
-    private final double m_dTimeTolerance = .01;
-    
+class Replayer 
+{
     private int m_iMax = 0;
     private int m_iCounter = 0;
     private boolean m_bRepStarted = false;
@@ -38,7 +35,7 @@ class Replayer {
      * Replays data from desired file.
      * @param sFileName
      */
-    public void replay(String sFileName)
+    public boolean replay(String sFileName)
     {                
         if(!m_bRepStarted)
         {
@@ -76,6 +73,8 @@ class Replayer {
             if(m_bVerboseMode)
                 System.out.println("Replay Ended");
         }
+        
+        return m_bDoneReplay;
     }
     
     /**
@@ -104,10 +103,7 @@ class Replayer {
      * @return 
      */
     public double getReplayTime()
-    {      
-        if(m_tmReplay.get() < m_dTimeTolerance)
-            return -1;
-        
+    {              
         return Config.SetDoublePrecision(m_tmReplay.get());
     }
     

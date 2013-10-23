@@ -16,12 +16,6 @@ public class JoyData
     private double m_dX = 0;
     private double m_dY = 0;
     
-    /**
-     * Sets the values.
-     * @param dLeftSpeed
-     * @param dMtRight
-     * @param bFeedStatus 
-     */
     public void setValues(double dTimer, double dX, double dY)
     {
         m_dTime = dTimer;

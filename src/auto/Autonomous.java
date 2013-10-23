@@ -94,9 +94,9 @@ public class Autonomous {
      */
     public void replay()
     {
-        m_replayer.replay(m_sFileName);
+        boolean m_bDoneReplay = m_replayer.replay(m_sFileName);
         
-        if(m_replayer.getReplayTime() >= 0.00 && !overTimeLimit(m_replayer.getReplayTime()))
+        if(!m_bDoneReplay && !overTimeLimit(m_replayer.getReplayTime()))
             m_sAutonmousStatus = "Rep: " + m_replayer.getReplayTime();
         
         else if(overTimeLimit(m_replayer.getReplayTime()))
@@ -120,7 +120,7 @@ public class Autonomous {
     {
         m_recorder.record(m_sFileName);
         
-        if((m_joy.getSwitch(Config.btAllowEdit) || m_sFileName.equalsIgnoreCase(m_sRegOutput)) && !overTimeLimit(m_recorder.getRecordTime()))
+        if(m_sFileName.equalsIgnoreCase(m_sRegOutput) || (m_joy.getSwitch(Config.btAllowEdit) && !overTimeLimit(m_recorder.getRecordTime())))
             m_sAutonmousStatus = "Rec: " + m_recorder.getRecordTime();
         
         else if(overTimeLimit(m_recorder.getRecordTime()))
@@ -129,7 +129,7 @@ public class Autonomous {
             m_sAutonmousStatus = "Record Timeout";
         }
         
-        else
+        else if(!m_joy.getSwitch(Config.btAllowEdit))
             m_sAutonmousStatus = "Can't Edit";
     }
     
