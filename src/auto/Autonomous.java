@@ -96,7 +96,7 @@ public class Autonomous {
     {
         m_replayer.replay(m_sFileName);
         
-        if(m_replayer.getReplayTime() > 0.00 && !overTimeLimit(m_replayer.getReplayTime()))
+        if(m_replayer.getReplayTime() >= 0.00 && !overTimeLimit(m_replayer.getReplayTime()))
             m_sAutonmousStatus = "Rep: " + m_replayer.getReplayTime();
         
         else if(overTimeLimit(m_replayer.getReplayTime()))
@@ -107,6 +107,7 @@ public class Autonomous {
         
         else
         {
+            System.out.println("Finished Replaying");
             m_joy.setSwitch(Config.btReplay, false);
             m_sAutonmousStatus = "Done";
         }

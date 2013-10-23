@@ -60,7 +60,7 @@ public class MyJoystick extends Joystick
     
     public boolean gotPressed(int chan)
     {
-        return buttonLast[chan-1];
+        return buttonPressed[chan-1];
     }
     
     public boolean getSwitch(int chan)

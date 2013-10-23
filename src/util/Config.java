@@ -16,9 +16,13 @@ import edu.wpi.first.wpilibj.DriverStationLCD;
 public class Config 
 {
     // Motors
-    public static final int chanMotorLeft = 1;
-    public static final int chanMotorRight = 2;
-    
+    public static final int chanDriveLeft1 = 4;
+    public static final int chanDriveLeft2= 5;
+    public static final int chanDriveLeft3 = 6;
+    public static final int chanDriveRight1 = 1;
+    public static final int chanDriveRight2 = 2;
+    public static final int chanDriveRight3 = 3;
+
     // Ints
     public static final int iPs3Port = 1;
     public static final int iPs3Buttons = 13;

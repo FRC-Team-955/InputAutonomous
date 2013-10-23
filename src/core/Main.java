@@ -60,7 +60,8 @@ public class Main extends IterativeRobot {
     /**
      * This function is called periodically during operator control
      */
-    public void teleopPeriodic() {
+    public void teleopPeriodic() 
+    {
         ps3Joy.updateButtons();
         driveSystem.runArcade();
         auto.run();
@@ -71,6 +72,5 @@ public class Main extends IterativeRobot {
      */
     public void testPeriodic() {
     
-    }
-    
+    }    
 }
