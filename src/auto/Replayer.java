@@ -18,7 +18,7 @@ class Replayer
     private int m_iCounter = 0;
     private boolean m_bRepStarted = false;
     private boolean m_bDoneReplay = false;
-    private boolean m_bVerboseMode = true;
+    private boolean m_bVerboseMode = false;
     private String m_sFileName = "";
     private Timer m_tmReplay = new Timer();
     private JoyData m_joyData = null;

@@ -49,7 +49,9 @@ public class Drive
         motorLeftSpeed = joyY+joyX;
         motorRightSpeed = joyY-joyX;
         setSpeed(motorLeftSpeed, motorRightSpeed);
-        System.out.println(enc.getRaw() + " - " + enc.getDirection() + " - " + enc.getDistance());
+        
+        if(joy.gotPressed(Config.btTest))
+            System.out.println("Button got Pressed");
     }
     
     private void setSpeed(double left, double right)

@@ -31,6 +31,7 @@ public class Config
     public static final int btRecord = 9;
     public static final int btAllowEdit = 10;
     public static final int btReplay = 12;
+    public static final int btTest = 1;
     
     // DriverStation Autonomous Button Channels
     public static final int stDigInAutoCtr = 1;

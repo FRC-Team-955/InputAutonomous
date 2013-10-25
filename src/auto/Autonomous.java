@@ -101,6 +101,7 @@ public class Autonomous {
         
         else if(overTimeLimit(m_replayer.getReplayTime()))
         {
+            System.out.println("Replay Timeout");
             m_replayer.stop();
             m_sAutonmousStatus = "Replay Timeout";
         }
