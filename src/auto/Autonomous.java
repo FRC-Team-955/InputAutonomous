@@ -2,6 +2,7 @@ package auto;
 
 import util.Config;
 import util.MyJoystick;
+import util.Station;
 
 /**
  * Class to record/replay robots movements.
@@ -67,13 +68,13 @@ public class Autonomous {
                 changeFile(Config.stDigInReg);
         
             else if(m_joy.getDpadRight())
-                changeFile(Config.stDigInAutoRght);
+                changeFile(Config.stDigInAutoRight);
 
             else if(m_joy.getDpadDown())
-                changeFile(Config.stDigInAutoCtr);
+                changeFile(Config.stDigInAutoCenter);
 
             else if(m_joy.getDpadLeft())
-                changeFile(Config.stDigInAutoLft);
+                changeFile(Config.stDigInAutoLeft);
         }
         
         if(m_joy.getSwitch(Config.btRecord))   
@@ -85,8 +86,8 @@ public class Autonomous {
         else
             resetAutonomous();
         
-        Config.PrintToStation(Config.stLineFile, m_sEditInfoStat);
-        Config.PrintToStation(Config.stLineAutonomous, m_sFileTypeStat + m_sAutonmousStatus);
+        Station.print(Config.stLineFile, m_sEditInfoStat);
+        Station.print(Config.stLineAutonomous, m_sFileTypeStat + m_sAutonmousStatus);
     }
     
     /**
@@ -150,18 +151,18 @@ public class Autonomous {
      * Chooses the ;autonomous from the driverstation, for use right before 
      * the actual autonomous begins.
      */
-    public void setFileBasedOnDriverInput()
+    public void setFile()
     {
         int iFileType = Config.stDigInReg;
         
-        if(Config.StationGetDigitalIn(Config.stDigInAutoCtr))
-            iFileType = Config.stDigInAutoCtr;
+        if(Station.getDitigalIn(Config.stDigInAutoCenter))
+            iFileType = Config.stDigInAutoCenter;
         
-        else if(Config.StationGetDigitalIn(Config.stDigInAutoLft))
-            iFileType = Config.stDigInAutoLft;
+        else if(Station.getDitigalIn(Config.stDigInAutoLeft))
+            iFileType = Config.stDigInAutoLeft;
         
-        else if(Config.StationGetDigitalIn(Config.stDigInAutoRght))
-            iFileType = Config.stDigInAutoRght;
+        else if(Station.getDitigalIn(Config.stDigInAutoRight))
+            iFileType = Config.stDigInAutoRight;
         
         changeFile(iFileType);
     }
@@ -174,21 +175,21 @@ public class Autonomous {
     {
         switch (iFileType)
         {
-            case Config.stDigInAutoCtr:   // 1
+            case Config.stDigInAutoCenter:   // 1
             {
                 m_sFileTypeStat = "AutoC: ";
                 m_sFileName = m_sAutoCenter; 
                 break;
             } 
 
-            case Config.stDigInAutoLft:   // 2
+            case Config.stDigInAutoLeft:   // 2
             {
                 m_sFileTypeStat = "AutoL: ";
                 m_sFileName = m_sAutoLeft;
                 break;
             }
 
-            case Config.stDigInAutoRght:  // 3
+            case Config.stDigInAutoRight:  // 3
             {
                 m_sFileTypeStat = "AutoR: ";
                 m_sFileName = m_sAutoRight; 

@@ -20,7 +20,8 @@ import auto.Autonomous;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Main extends IterativeRobot {
+public class Main extends IterativeRobot 
+{
     MyJoystick ps3Joy;
     Drive driveSystem;
     Autonomous auto;
@@ -28,8 +29,11 @@ public class Main extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public void robotInit() {
-        ps3Joy = new MyJoystick(Config.iPs3Port, Config.iPs3Buttons);
+    public void robotInit() 
+    {
+        ps3Joy = new MyJoystick(Config.ps3Port, Config.ps3Buttons);
+        ps3Joy.setAxisChannel(MyJoystick.AxisType.kX, 3);
+        ps3Joy.setAxisChannel(MyJoystick.AxisType.kY, 2);
         driveSystem = new Drive(ps3Joy);
         auto = new Autonomous(ps3Joy);
     }
@@ -46,13 +50,14 @@ public class Main extends IterativeRobot {
      */
     public void autonomousInit()
     {
-        auto.setFileBasedOnDriverInput();
+        auto.setFile();
     }
     
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
+    public void autonomousPeriodic() 
+    {
         auto.replay();
         driveSystem.runArcade();
     }
@@ -70,7 +75,8 @@ public class Main extends IterativeRobot {
     /**
      * This function is called periodically during test mode
      */
-    public void testPeriodic() {
+    public void testPeriodic() 
+    {
     
     }    
 }

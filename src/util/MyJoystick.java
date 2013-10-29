@@ -58,6 +58,11 @@ public class MyJoystick extends Joystick
         yPos = newY;
     }
     
+    public void setButton(int chan, boolean newVal)
+    {
+        buttonPressed[chan-1] = newVal;
+    }
+    
     public boolean gotPressed(int chan)
     {
         return buttonPressed[chan-1];

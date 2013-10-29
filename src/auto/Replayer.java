@@ -5,6 +5,7 @@ import util.FileReader;
 import util.Config;
 import util.MyJoystick;
 import edu.wpi.first.wpilibj.Timer;
+import util.MyMath;
 
 
 /**
@@ -21,7 +22,7 @@ class Replayer
     private boolean m_bVerboseMode = false;
     private String m_sFileName = "";
     private Timer m_tmReplay = new Timer();
-    private JoyData m_joyData = null;
+    private JoyData m_joyCurrentData = null;
     private JoyData[] m_joyDataList = null;
     private FileReader m_fileReader = null;
     private MyJoystick m_joy = null;
@@ -45,23 +46,24 @@ class Replayer
             m_joy.setAutoMode(true);
             m_sFileName = sFileName;
             m_joyDataList = readAllData();
-            m_joyData = m_joyDataList[m_iCounter++];
+            m_joyCurrentData = m_joyDataList[m_iCounter++];
             m_tmReplay.start();
             m_bRepStarted = true;
         }
 
         if(!m_bDoneReplay)
         {            
-            if(m_tmReplay.get() >= m_joyData.getTimer())    // If true it means we want new data
-                m_joyData.setValues(m_joyDataList[m_iCounter++]);
+            if(m_tmReplay.get() >= m_joyCurrentData.getTimer())    // If true it means we want new data
+                m_joyCurrentData.setValues(m_joyDataList[m_iCounter++]);
             
-            m_joy.setXY(m_joyData.getX(), m_joyData.getY());
+            m_joy.setXY(m_joyCurrentData.getX(), m_joyCurrentData.getY());
+            m_joy.setButton(Config.btPush, m_joyCurrentData.getPush());
 
             if(m_iCounter < 0 || m_iCounter >= m_iMax)   // If true it means we've read all data from file
                 m_bDoneReplay = true;
             
             if(m_bVerboseMode)
-                System.out.println("Left: " + m_joyData.getX() + ", Right: " + m_joyData.getY()); 
+                System.out.println("Left: " + m_joyCurrentData.getX() + ", Right: " + m_joyCurrentData.getY()); 
         }
 
         else
@@ -88,7 +90,7 @@ class Replayer
             m_tmReplay.stop();
             m_tmReplay.reset();
             m_sFileName = "";
-            m_joyData = null;
+            m_joyCurrentData = null;
             m_joyDataList = null;
             m_iCounter = 0;
             m_iMax = 0;
@@ -104,7 +106,7 @@ class Replayer
      */
     public double getReplayTime()
     {              
-        return Config.SetDoublePrecision(m_tmReplay.get());
+        return MyMath.SetDoublePrecision(m_tmReplay.get());
     }
     
     /**
@@ -129,7 +131,10 @@ class Replayer
         for(int index = 0; index < m_iMax; index++)
         {
             joyData[index] = new JoyData();
-            joyData[index].setValues(m_fileReader.readDouble(), m_fileReader.readDouble(), m_fileReader.readDouble());
+            joyData[index].setTime(m_fileReader.readDouble());
+            joyData[index].setX(m_fileReader.readDouble());
+            joyData[index].setY(m_fileReader.readDouble());
+            joyData[index].setPush(m_fileReader.readBoolean());
         }
         
         m_fileReader.close();

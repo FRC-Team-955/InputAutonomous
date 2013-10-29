@@ -15,28 +15,47 @@ public class JoyData
     private double m_dTime = 0;
     private double m_dX = 0;
     private double m_dY = 0;
+    private boolean m_bPush = false;
     
-    public void setValues(double dTimer, double dX, double dY)
+    private void setValues(double dTimer, double dX, double dY, boolean bPush)
     {
         m_dTime = dTimer;
         m_dX = dX;
         m_dY = dY;
+        m_bPush = bPush;
     }
     
     /**
      * Sets the values.
-     * @param bot 
      */
     public void setValues(double dTime, MyJoystick joy)
     {
-        setValues(dTime, joy.getMyX(), joy.getMyY());
+        setValues(dTime, joy.getMyX(), joy.getMyY(), joy.getRawButton(Config.btPush));
     }
     
     public void setValues(JoyData emu)
     {
-        m_dTime = emu.getTimer();
-        m_dX = emu.getX();
-        m_dY = emu.getY();
+        setValues(emu.getTimer(), emu.getX(), emu.getY(), getPush());
+    }
+    
+    public void setTime(double timeVal)
+    {
+        m_dTime = timeVal;
+    }
+    
+    public void setX(double x)
+    {
+        m_dX = x;
+    }
+    
+    public void setY(double y)
+    {
+        m_dY = y;
+    }
+    
+    public void setPush(boolean val)
+    {
+        m_bPush = val;
     }
     
     /**
@@ -64,5 +83,10 @@ public class JoyData
     public double getY()
     {
         return m_dY;
+    }
+    
+    public boolean getPush()
+    {
+        return m_bPush;
     }
 }

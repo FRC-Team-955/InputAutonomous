@@ -6,6 +6,7 @@ import util.MyJoystick;
 import util.JoyData;
 import java.util.Vector;
 import edu.wpi.first.wpilibj.Timer;
+import util.MyMath;
 
 /**
  * This class is responsible for writing the bots activities to the specified 
@@ -48,13 +49,8 @@ class Recorder {
         
         if(!m_bRecDone)
         {
-            /*
-             * Have to reinitlalize because adding the object into the list
-             * it actually just makes a copy that also points to the original. 
-             * So if the original is changed so will the data in the object list.
-             */
             m_Index++;
-            m_joyData = new JoyData();			
+            m_joyData = new JoyData();  // Have to reinit it to prevent changing previous ones		
             m_joyData.setValues(m_tmRecorder.get(), m_joy);
             m_List.addElement(m_joyData);
         }
@@ -104,7 +100,7 @@ class Recorder {
      */
     public double getRecordTime()
     {
-        return Config.SetDoublePrecision(m_tmRecorder.get());
+        return MyMath.SetDoublePrecision(m_tmRecorder.get());
     }
     
     /**
@@ -125,6 +121,7 @@ class Recorder {
             m_fileWriter.writeDouble(m_joyData.getTimer());
             m_fileWriter.writeDouble(m_joyData.getX());
             m_fileWriter.writeDouble(m_joyData.getY());
+            m_fileWriter.writeBoolean(m_joyData.getPush());
         }
 
         m_fileWriter.close();
