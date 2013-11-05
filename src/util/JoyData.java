@@ -30,12 +30,12 @@ public class JoyData
      */
     public void setValues(double dTime, MyJoystick joy)
     {
-        setValues(dTime, joy.getMyX(), joy.getMyY(), joy.getRawButton(Config.btPush));
+        setValues(dTime, joy.getMyX(), joy.getMyY(), joy.gotPressed(Config.btEjector));
     }
     
     public void setValues(JoyData emu)
     {
-        setValues(emu.getTimer(), emu.getX(), emu.getY(), getPush());
+        setValues(emu.getTimer(), emu.getX(), emu.getY(), emu.getEjector());
     }
     
     public void setTime(double timeVal)
@@ -85,7 +85,7 @@ public class JoyData
         return m_dY;
     }
     
-    public boolean getPush()
+    public boolean getEjector()
     {
         return m_bPush;
     }

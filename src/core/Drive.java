@@ -41,31 +41,25 @@ public class Drive
         motorRightSpeed = joyY-joyX;
         setSpeed(motorLeftSpeed, motorRightSpeed);
         
-        if(joy.gotPressed(Config.btPush))
-            System.out.println("Button got Pressed");
+        if(joy.gotPressed(Config.btEjector))
+            System.out.println("Ejector got Pressed");
     }
     
-    private void setSpeed(double left, double right)
+    private void setSpeed(double newLeft, double newRight)
     {
-        if(Math.abs(getLeftSpeed() - left) > Config.rampRate)
-            left = getLeftSpeed() + (Config.rampRate * (getLeftSpeed() > left ? -1:1));
+        double currentLeft = motorLeft1.get();
+        double currentRight = motorRight1.get();
+        newLeft = -newLeft;
         
-        if(Math.abs(getRightSpeed() - right) > Config.rampRate)
-            right = getRightSpeed() + (Config.rampRate * (getRightSpeed() > right ? -1:1));
+        if(Math.abs(currentLeft - newLeft) > Config.rampRate)
+            newLeft = currentLeft + (Config.rampRate * (currentLeft > newLeft ? -1:1));
         
-        motorLeft1.set(left);
-        motorLeft2.set(left);
-        motorRight1.set(right);
-        motorRight2.set(right);
-    }
-    
-    public double getLeftSpeed()
-    {
-        return motorLeft1.get();
-    }
-    
-    public double getRightSpeed()
-    {
-        return motorRight1.get();
+        if(Math.abs(currentRight - newRight) > Config.rampRate)
+            newRight = currentRight + (Config.rampRate * (currentRight > newRight ? -1:1));
+        
+        motorLeft1.set(newLeft);
+        motorLeft2.set(newLeft);
+        motorRight1.set(newRight);
+        motorRight2.set(newRight);
     }
 }

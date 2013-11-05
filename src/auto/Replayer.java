@@ -57,7 +57,7 @@ class Replayer
                 m_joyCurrentData.setValues(m_joyDataList[m_iCounter++]);
             
             m_joy.setXY(m_joyCurrentData.getX(), m_joyCurrentData.getY());
-            m_joy.setButton(Config.btPush, m_joyCurrentData.getPush());
+            m_joy.setButton(Config.btEjector, m_joyCurrentData.getEjector());
 
             if(m_iCounter < 0 || m_iCounter >= m_iMax)   // If true it means we've read all data from file
                 m_bDoneReplay = true;

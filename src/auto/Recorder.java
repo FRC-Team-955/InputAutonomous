@@ -121,7 +121,7 @@ class Recorder {
             m_fileWriter.writeDouble(m_joyData.getTimer());
             m_fileWriter.writeDouble(m_joyData.getX());
             m_fileWriter.writeDouble(m_joyData.getY());
-            m_fileWriter.writeBoolean(m_joyData.getPush());
+            m_fileWriter.writeBoolean(m_joyData.getEjector());
         }
 
         m_fileWriter.close();
