@@ -29,13 +29,23 @@ public class Config
     public static final int btReplay = 12;
     public static final int btEjector = 1;
     
-    // DriverStation Autonomous Button Channels
+    // DriverStation Digital Input Channels 1-8 available
     public static final int stDigInAutoCenter = 1;
     public static final int stDigInAutoLeft = 2;
     public static final int stDigInAutoRight = 3;
     public static final int stDigInReg = 4;
+    public static final int stDigInDrive = 5;
+    public static final int stDigInAutonomous = 6;
+    public static final int stDigInRecorder = 7;
+    public static final int stDigInReplayer = 8;
     
     // Driverstation line
     public static final int stLineFile = 2;
     public static final int stLineAutonomous = 3;
+    
+    // Output ids
+    public static final int IdDrive = 1;
+    public static final int IdAutonomous = 2;
+    public static final int IdRecorder = 3;
+    public static final int IdReplayer= 4;
 }

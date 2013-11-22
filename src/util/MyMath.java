@@ -17,6 +17,6 @@ public class MyMath
      */
     public static double SetDoublePrecision(double dDouble)
     {
-        return (Double.valueOf(Math.floor(dDouble * 10 + 0.5) / 10)).doubleValue();
+        return (Double.valueOf(Math.floor(dDouble * 100 + 0.5) / 100)).doubleValue();
     }
 }

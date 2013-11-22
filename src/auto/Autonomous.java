@@ -2,6 +2,7 @@ package auto;
 
 import util.Config;
 import util.MyJoystick;
+import util.Output;
 import util.Station;
 
 /**
@@ -102,14 +103,14 @@ public class Autonomous {
         
         else if(overTimeLimit(m_replayer.getReplayTime()))
         {
-            System.out.println("Replay Timeout");
+            Output.println(Config.IdAutonomous, "Replay Timeout");
             m_replayer.stop();
             m_sAutonmousStatus = "Replay Timeout";
         }
         
         else
         {
-            System.out.println("Finished Replaying");
+            Output.println(Config.IdAutonomous, "Finished Replaying");
             m_joy.setSwitch(Config.btReplay, false);
             m_sAutonmousStatus = "Done";
         }

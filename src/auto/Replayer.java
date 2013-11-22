@@ -6,6 +6,7 @@ import util.Config;
 import util.MyJoystick;
 import edu.wpi.first.wpilibj.Timer;
 import util.MyMath;
+import util.Output;
 
 
 /**
@@ -19,7 +20,6 @@ class Replayer
     private int m_iCounter = 0;
     private boolean m_bRepStarted = false;
     private boolean m_bDoneReplay = false;
-    private boolean m_bVerboseMode = false;
     private String m_sFileName = "";
     private Timer m_tmReplay = new Timer();
     private JoyData m_joyCurrentData = null;
@@ -40,9 +40,7 @@ class Replayer
     {                
         if(!m_bRepStarted)
         {
-            if(m_bVerboseMode)
-                System.out.println("Replay Initiated");
-				
+            Output.println(Config.IdReplayer, "Replay Initiated");
             m_joy.setAutoMode(true);
             m_sFileName = sFileName;
             m_joyDataList = readAllData();
@@ -62,8 +60,7 @@ class Replayer
             if(m_iCounter < 0 || m_iCounter >= m_iMax)   // If true it means we've read all data from file
                 m_bDoneReplay = true;
             
-            if(m_bVerboseMode)
-                System.out.println("Left: " + m_joyCurrentData.getX() + ", Right: " + m_joyCurrentData.getY()); 
+            Output.println(Config.IdReplayer, "Left: " + m_joyCurrentData.getX() + ", Right: " + m_joyCurrentData.getY() + " Ejector: " + m_joy.gotPressed(Config.btEjector)); 
         }
 
         else
@@ -71,9 +68,7 @@ class Replayer
             m_joy.setXY(0, 0);
             m_tmReplay.stop();
             m_tmReplay.reset();
-			
-            if(m_bVerboseMode)
-                System.out.println("Replay Ended");
+            Output.println(Config.IdReplayer, "Replay Ended");
         }
         
         return m_bDoneReplay;

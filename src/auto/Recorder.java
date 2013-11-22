@@ -7,6 +7,7 @@ import util.JoyData;
 import java.util.Vector;
 import edu.wpi.first.wpilibj.Timer;
 import util.MyMath;
+import util.Output;
 
 /**
  * This class is responsible for writing the bots activities to the specified 
@@ -18,7 +19,6 @@ class Recorder {
     private int m_Index = 0;
     private boolean m_bRecStarted = false;
     private boolean m_bRecDone = false;
-    private boolean m_bVerboseMode = false;
     private String m_sFile = "";
     private Timer m_tmRecorder = new Timer();
     private Vector m_List = new Vector();
@@ -39,9 +39,7 @@ class Recorder {
     {        
         if(!m_bRecStarted)
         {
-            if(m_bVerboseMode)
-                System.out.println("Recording!!!");
-			
+            Output.println(Config.IdRecorder, "Recording!!!");	
             m_sFile = sFileName;
             m_tmRecorder.start();
             m_bRecStarted = true;
@@ -114,10 +112,7 @@ class Recorder {
         for(int iPos = 0; iPos < m_Index; iPos++)
         {
             m_joyData.setValues((JoyData) m_List.elementAt(iPos));
-			
-            if(m_bVerboseMode)
-                System.out.println("X: " + m_joyData.getX()+ ", Y: " + m_joyData.getY());
-			
+            Output.println(Config.IdRecorder, "X: " + m_joyData.getX()+ ", Y: " + m_joyData.getY());	
             m_fileWriter.writeDouble(m_joyData.getTimer());
             m_fileWriter.writeDouble(m_joyData.getX());
             m_fileWriter.writeDouble(m_joyData.getY());

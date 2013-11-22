@@ -8,6 +8,7 @@ package core;
 import edu.wpi.first.wpilibj.Talon;
 import util.MyJoystick;
 import util.Config;
+import util.Output;
 
 /**
  *
@@ -40,9 +41,7 @@ public class Drive
         motorLeftSpeed = joyY+joyX;
         motorRightSpeed = joyY-joyX;
         setSpeed(motorLeftSpeed, motorRightSpeed);
-        
-        if(joy.gotPressed(Config.btEjector))
-            System.out.println("Ejector got Pressed");
+        Output.println(Config.IdDrive, "Left: " + motorLeft1.get() + " Right: " + motorRight1.get()); 
     }
     
     private void setSpeed(double newLeft, double newRight)

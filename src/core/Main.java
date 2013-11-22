@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import util.MyJoystick;
 import util.Config;
 import auto.Autonomous;
+import util.Output;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -31,6 +32,7 @@ public class Main extends IterativeRobot
      */
     public void robotInit() 
     {
+        Output.updateArray();
         ps3Joy = new MyJoystick(Config.ps3Port, Config.ps3Buttons);
         ps3Joy.setAxisChannel(MyJoystick.AxisType.kX, 3);
         ps3Joy.setAxisChannel(MyJoystick.AxisType.kY, 2);
@@ -41,6 +43,8 @@ public class Main extends IterativeRobot
      // This function is called when we disable the robot.
     public void disabledInit()
     {
+        Output.updateArray();
+        
         // Resets the replay to false if it was true before
         auto.resetAutonomous(); 
     }
@@ -50,6 +54,7 @@ public class Main extends IterativeRobot
      */
     public void autonomousInit()
     {
+        Output.updateArray();
         auto.setFile();
     }
     
@@ -58,6 +63,7 @@ public class Main extends IterativeRobot
      */
     public void autonomousPeriodic() 
     {
+        Output.updateArray();
         auto.replay();
         driveSystem.runArcade();
     }
@@ -67,6 +73,7 @@ public class Main extends IterativeRobot
      */
     public void teleopPeriodic() 
     {
+        Output.updateArray();
         ps3Joy.updateButtons();
         driveSystem.runArcade();
         auto.run();
